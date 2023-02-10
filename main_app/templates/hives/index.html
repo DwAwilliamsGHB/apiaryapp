@@ -3,6 +3,16 @@
 
 <h1>Hive List</h1>
 
-
+{% for hive in hives %}
+  <a href="{% url 'detail' hive.id %}">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ hive.title }}</span>
+        <p>Location: {{ hive.location }}</p>
+        <p>Description: {{ hive.description|linebreaks }}</p>
+      </div>
+    </div>
+  </a>
+{% endfor %}
 
 {% endblock %}
