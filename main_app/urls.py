@@ -1,3 +1,6 @@
+from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from . import views
 
@@ -11,5 +14,4 @@ urlpatterns = [
     path('hives/<int:pk>/delete/', views.HiveDelete.as_view(), name='hives_delete'),
     path('hives/<int:hive_id>/add_comment/', views.add_comment, name='add_comment'),
     path('accounts/signup/', views.signup, name='signup'),
-
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

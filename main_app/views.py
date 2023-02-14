@@ -14,6 +14,7 @@ def home(request):
 def about(request):
   return render(request, 'about.html')
 
+@login_required
 def hives_index(request):
   hives = Hive.objects.all()
   return render(request, 'hives/index.html', {

@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
+<section class="container">
+  <h1>Log <span style="color: rgb(248, 190, 46)">In</span></h1>
 
-<h1>Log In</h1>
-
-<form method="POST" action="{% url 'login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="hidden" name="next" value="{{ next }}">
-    <button type="submit" class="btn">Log In</button>
+  <form method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="hidden" name="next" value="{{ next }}">
+      <button type="submit" class="btn btn-warning">Log In</button>
   </form>
+
+</section>
 
 {% endblock %}

@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Home</h1>
-
-
+{% if user.is_authenticated %}
+    <h1 class="text-center p-5">Welcome, <span style="color: rgb(248, 190, 46)">{{user.username}}</span>!</h1>
+{% else %}
+    <h1 class="text-center p-5">Welcome, <span style="color: rgb(248, 190, 46)">New User</span>!</h1>
+{% endif %}
 
 {% endblock %}

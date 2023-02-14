@@ -1,4 +1,12 @@
-body {
+* {
+  box-sizing: border-box;
+}
+
+/* body header nav div div ul li .nav-link:active {
+  background: yellow;
+} */
+
+/* body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -6,7 +14,7 @@ body {
   
   main {
     flex: 1 0 auto;
-  }
+  } */
   
   footer.page-footer {
     padding-top: 0;
