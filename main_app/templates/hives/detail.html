@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Hive Details</h1>
-
-<div class="row">
-  <div class="col s6">
-    <div class="card">
-      <div class="card-content">
-        <span class="card-title">{{ hive.title }}</span>
-        <a href="{% url 'location_details' hive.id %}">{{ hive.location }}</a>
-        <p>Description: {{ hive.description|linebreaks }}</p>
+<h1 class="text-center p-3">Hive <span style="color: rgb(248, 190, 46)">Details</span></h1>
+<section id="background">
+<div class="container">
+  <div class="p-3">
+    <div class="card p-3">
+      <div>
+        <span style="color: rgb(248, 190, 46)"><b>{{ hive.title }}</b></span>
+        <a href="{% url 'location_details' hive.id %}" id="detail-location">{{ hive.location }}</a>
+        <p id="detail-desc">Description: {{ hive.description|linebreaks }}</p>
       </div>
       <div>
-        <a href="{% url 'hives_update' hive.id %}" class="btn btn-warning">Edit</a>
-        <a href="{% url 'hives_delete' hive.id %}" class="btn btn-warning">Delete</a>
+        <a href="{% url 'hives_update' hive.id %}" class="btn btn-warning" id="detail-edit">Edit</a>
+        <a href="{% url 'hives_delete' hive.id %}" class="btn btn-warning" id="detail-delete">Delete</a>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@
   <div>
     <form action="{% url 'add_comment' hive.id %}" method="POST">
         {% csrf_token %}
-        {{ comment_form.as_p }}
+        {{ comment_form.as_table }}
         <input type="submit" class="btn btn-warning" value="Comment">
     </form>
     <table>
@@ -48,7 +48,8 @@
       </tbody>
     </table>
   </div>
-</div>
+  </div>
+</section>
 
 <script>
     const dateEl = document.getElementById('id_date');
