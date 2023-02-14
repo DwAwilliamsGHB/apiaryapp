@@ -1,12 +1,15 @@
 import os
+import uuid
+import boto3
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Hive, Address
+from .models import Hive, Address, Photo
 from .forms import CommentForm
+
 
 # Create your views here.
 def home(request):
@@ -85,8 +88,18 @@ def location_detail(request, hive_id):
         'long': long,
     })
   
+def add_photo(request, hive_id):
+  photo_file = request.FILES.get('photo_file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
 
-
-
-
-
+    try:
+      bucket = os.environ['S3_BUCKET']
+      s3.upload_fileobj(photo_file, bucket, key)
+      url = f"{os.environ['S#_BUCKET_URL']}{bucket}/{key}"
+      Photo.objects.create(url=url, hive_id=hive_id)
+    except Exception as e:
+      print('An error occured uploading file to S3')
+      print(e)
+  return redirect('detail', hive_id=hive_id)

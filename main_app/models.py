@@ -65,6 +65,12 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.date}"
 
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    hive = models.ForeignKey(Hive, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for hive_id: {self.hive_id} @{self.url}"
 
 
 
