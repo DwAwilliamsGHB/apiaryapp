@@ -2,9 +2,71 @@
   box-sizing: border-box;
 }
 
-/* body header nav div div ul li .nav-link:active {
-  background: yellow;
-} */
+.nav-link:active {
+  background-color: lightgrey!important;
+}
+
+#explore-button {
+  background-color: lightgrey!important;
+}
+
+#signup {
+  padding: 10em!important;
+  margin: auto;
+  width: 50%;
+  border: 3px solid grey;
+}
+
+#reg-back {
+  background-color: rgb(248, 190, 46);
+}
+
+.container {
+  background-color: white;
+  border: 1px solid lightgray;
+  box-shadow: 3px;
+  border-radius: 1rem;
+  height: 100%;
+}
+
+.card {
+  border: 3px solid grey;
+  width: 20rem;
+  height: 15rem;
+}
+
+#index-boxes {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#index-link {
+  text-decoration: none;
+  color: black;
+}
+
+#index-desc {
+  color: light-grey;
+  padding-top: 1rem;
+}
+
+#index-location {
+  text-align:right;
+  padding-right: 1rem;
+}
+
+#background {
+  background-color: rgb(237, 237, 237);
+}
+
+#add-edit-form {
+  padding: 10em!important;
+  margin: auto;
+  width: 50%;
+  border: 3px solid grey;
+}
 
 /* body {
     display: flex;
