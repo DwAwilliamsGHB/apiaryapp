@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Hive List</h1>
+<h1 class="text-center" style="color: rgb(248, 190, 46)">Explore</h1>
 
 {% for hive in hives %}
   <a href="{% url 'detail' hive.id %}">
-    <div class="card">
-      <div class="card-content">
-        <span class="card-title">{{ hive.title }}</span>
-        <p>Location: {{ hive.location }}</p>
-        <p>Description: {{ hive.description|linebreaks }}</p>
+    <div class="card" style="width: 18rem">
+      <div>
+        <div class="col">
+          <div>
+            <span>{{ hive.title }}</span>
+            <p>Location: {{ hive.location }}</p>
+            <p>Description: {{ hive.description|linebreaks }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </a>
