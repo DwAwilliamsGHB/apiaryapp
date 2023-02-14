@@ -41,8 +41,10 @@
       <tbody>
         {% for comment in hive.comment_set.all %}
           <tr>
-            <td>{{comment.date}}</td>
+            <td>{{comment.created_at}}</td>
             <td>{{comment.content}}</td>
+            <td><a href="{% url 'delete_comment' comment.id %}" class="btn btn-warning">Delete</a></td>
+            <td><a href="{% url 'update_comment' comment.id %}" class="btn btn-warning">Update</a></td>
           </tr>
         {% endfor %}
       </tbody>
@@ -50,15 +52,5 @@
   </div>
   </div>
 </section>
-
-<script>
-    const dateEl = document.getElementById('id_date');
-    M.Datepicker.init(dateEl, {
-      format: 'yyyy-mm-dd',
-      defaultDate: new Date(),
-      setDefaultDate: true,
-      autoClose: true
-    });
-</script>
 
 {% endblock %}
