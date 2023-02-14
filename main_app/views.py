@@ -1,15 +1,27 @@
+import os
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Hive
+from .models import Hive, Address
 from .forms import CommentForm
 
 # Create your views here.
 def home(request):
-  return render(request, 'home.html')
+  mapbox_access_token = os.environ.get('MAPBOX_ACCESS_TOKEN')
+  default_lat = 40.7128
+  default_long = -74.0060
+  addresses = Address.objects.all()
+  print(addresses)  # Debug statement to check the queryset
+  return render(request, 'home.html', {
+    'mapbox_access_token': mapbox_access_token,
+    'default_lat': default_lat,
+    'default_long': default_long,
+    'addresses': addresses,
+  })
+
 
 def about(request):
   return render(request, 'about.html')
@@ -60,3 +72,21 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+def location_detail(request, hive_id):
+    hive = Hive.objects.get(id=hive_id)
+    mapbox_access_token = os.environ.get('MAPBOX_ACCESS_TOKEN')
+    address = hive.address
+    lat = address.lat
+    long = address.long
+    return render(request, 'location.html', {
+        'mapbox_access_token': mapbox_access_token,
+        'lat': lat,
+        'long': long,
+    })
+  
+
+
+
+
+

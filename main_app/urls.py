@@ -14,4 +14,5 @@ urlpatterns = [
     path('hives/<int:pk>/delete/', views.HiveDelete.as_view(), name='hives_delete'),
     path('hives/<int:hive_id>/add_comment/', views.add_comment, name='add_comment'),
     path('accounts/signup/', views.signup, name='signup'),
+    path('hives/<int:hive_id>/location/', views.location_detail, name='location_details'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
