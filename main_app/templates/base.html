@@ -20,7 +20,7 @@
       <div class="container-fluid">
         <div>
           
-          <img src="static/images/apiaryicon.png" class="img-thumbnail">
+          <img src="{% static 'images/apiaryicon.png' %}" class="img-thumbnail">
           <a href="/" class="navbar-brand btn btn-warning">Apiary</a>
         </div>
 
@@ -48,8 +48,8 @@
     {% block content %}
     {% endblock %}
   </main>
-  <footer class="navbar-fixed-bottom bg-light">
-    <div class="container">
+  <footer class="fixed-bottom bg-light">
+    <div class="p-2">
       <div>All Rights Reserved, &copy; 2023 Apiary &nbsp;</div>
     </div>
   </footer>

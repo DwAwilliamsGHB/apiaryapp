@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1 class="text-center" style="color: rgb(248, 190, 46)">Explore</h1>
+<h1 class="text-center p-3">Explore</h1>
+<div class="container" id="index-boxes">
+ 
+  {% for hive in hives %}
+    
 
-{% for hive in hives %}
-  <a href="{% url 'detail' hive.id %}">
-    <div class="card" style="width: 18rem">
-      <div>
-        <div class="col">
-          <div>
-            <span>{{ hive.title }}</span>
-            <p>Location: {{ hive.location }}</p>
-            <p>Description: {{ hive.description|linebreaks }}</p>
-          </div>
-        </div>
-      </div>
+  <div class="row p-3">     
+    <div class="card p-3 col-3 col-md-2">
+      <a href="{% url 'detail' hive.id %}" id="index-link">
+        <h3 style="color: rgb(248, 190, 46)"><b>{{ hive.title }}</b></h3>
+        <p id="index-location"><u>{{ hive.location }}</u></p>
+        <p id="index-desc">{{ hive.description|linebreaks }}</p>
+      </a>
     </div>
-  </a>
-{% endfor %}
+    </div>
+  {% endfor %}
+</div>
+
 
 {% endblock %}
