@@ -186,7 +186,7 @@ def location_detail(request, hive_id):
     })
   
 def add_photo(request, hive_id):
-  photo_file = request.FILES.get('photo_file', None)
+  photo_file = request.FILES.get('photo-file', None)
   if photo_file:
     s3 = boto3.client('s3')
     key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
@@ -194,7 +194,7 @@ def add_photo(request, hive_id):
     try:
       bucket = os.environ['S3_BUCKET']
       s3.upload_fileobj(photo_file, bucket, key)
-      url = f"{os.environ['S#_BUCKET_URL']}{bucket}/{key}"
+      url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
       Photo.objects.create(url=url, hive_id=hive_id)
     except Exception as e:
       print('An error occured uploading file to S3')
