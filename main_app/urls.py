@@ -18,5 +18,6 @@ urlpatterns = [
     path('hives/<int:hive_id>/add_photo/', views.add_photo, name='add_photo'),
     path('accounts/signup/', views.signup, name='signup'),
     path('hives/<int:hive_id>/location/', views.location_detail, name='location_details'),
+    path('addresses/<int:address_id>/hive/', views.get_hive, name='get_hive'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     

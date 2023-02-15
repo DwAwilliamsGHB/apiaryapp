@@ -33,6 +33,12 @@ class Address(models.Model):
         else:
             print("No latitude and longitude information found")
         return super(Address, self).save(*args, **kwargs)
+    
+    def get_hive(self):
+        try:
+            return Hive.objects.get(address=self)
+        except Hive.DoesNotExist:
+            return None
 
 
 class Hive(models.Model):
