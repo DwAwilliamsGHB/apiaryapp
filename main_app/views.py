@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Hive, Address
 from .forms import CommentForm
+from django.http import JsonResponse
 
 # Create your views here.
 def home(request):
@@ -22,6 +23,13 @@ def home(request):
     'addresses': addresses,
   })
 
+def get_hive(request, address_id):
+    address = Address.objects.get(id=address_id)
+    hive = address.get_hive()
+    if hive:
+        return JsonResponse({'hive_id': hive.id})
+    else:
+        return JsonResponse({'error': 'No Hive found'})
 
 def about(request):
   return render(request, 'about.html')
