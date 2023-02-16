@@ -48,11 +48,11 @@ class Hive(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True, blank=True)
 
-    def get_total_likes(self):
-        return self.likes.users.count()
+    def likes_count(self):
+        return self.like_set.count()
 
-    def get_total_dislikes(self):
-        return self.dislikes.users.count()
+    def dislikes_count(self):
+        return self.dislike_set.count()
 
     def __str__(self):
         return f'{self.title} ({self.id})'
@@ -66,38 +66,29 @@ class Hive(models.Model):
 
 
 class Comment(models.Model):
-    user =  models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
-    content = models.TextField(max_length=250)
+    content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    user =  models.ForeignKey(
+        User, 
+        on_delete=models.CASCADE, 
+    )
 
     hive = models.ForeignKey(
         Hive,
         on_delete=models.CASCADE
     )
-
+    
     def __str__(self):
-        return str(self.content)[:30]
+        return f"{self.user.username} - {self.content}"
 
 class Like(models.Model):
+    hive = models.ForeignKey(Hive, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    hive = models.OneToOneField(Hive, related_name="likes", on_delete=models.CASCADE)
-    users = models.ManyToManyField(User, related_name='requirement_hive_likes')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return str(self.comment.content)[:30]
-       
-class DisLike(models.Model):
-
-    hive = models.OneToOneField(Hive, related_name="dislikes", on_delete=models.CASCADE)
-    users = models.ManyToManyField(User, related_name='requirement_hive_dislikes')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return str(self.comment.content)
+class Dislike(models.Model):
+    hive = models.ForeignKey(Hive, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Photo(models.Model):
     url = models.CharField(max_length=200)
