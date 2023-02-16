@@ -12,6 +12,7 @@ from .forms import CommentForm
 from django.http import JsonResponse
 
 
+
 # Create your views here.
 def home(request):
   mapbox_access_token = os.environ.get('MAPBOX_ACCESS_TOKEN')
