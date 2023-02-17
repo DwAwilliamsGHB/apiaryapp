@@ -27,7 +27,9 @@ Apiary is built using the following technologies:
 
 ## Future Improvements
 
-There are several improvements that could be made to Apiary in the future. Some of these include:
+There are several improvements that will be made to Apiary in the future. You can track all our planned improvements here => https://trello.com/b/lf9YgrrK/project-3-apiary 
+
+Some of the major ones are:
 
 - Event tags: Allow users to tag their events with keywords to make them easier to find.
 - Private/public events: Give users the option to make their events public or private.
