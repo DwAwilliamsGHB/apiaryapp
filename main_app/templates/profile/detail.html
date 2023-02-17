@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<section id="background">
+    <h1 id="upload-hive" class="text-center p-4">Welcome, {{ user.username }}</h1>
+    <div class="container-index">
+        <div id="index-boxes">
+
+
+        {% for hive in hives %}
+            <div class="row p-3">     
+                <div class="card p-3 col-3 col-md-2" id="index-card">
+                    <a href="{% url 'detail' hive.id %}" id="index-link">
+                        <h3 style="color: rgb(248, 190, 46)"><b>{{ hive.title|linebreaks }}</b></h3>
+                        <p id="index-location"><u>{{ hive.location }}</u></p>
+                        <hr><p id="index-desc">{{ hive.description|linebreaks }}</p>
+                    </a>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
