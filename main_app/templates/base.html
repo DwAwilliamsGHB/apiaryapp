@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Apiary</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
@@ -22,24 +25,28 @@
           <img src="{% static 'images/apiaryicon.png' %}" class="img-thumbnail">
           <a href="/" id="nav-home" class="ms-auto navbar-nav nav-item nav-link btn">Apiary</a>
         </div>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navmenu">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a href="{% url 'about' %}" class="nav-link btn">About</a></li>
-            {% if user.is_authenticated %} 
-              <li class="nav-item"><a href="{% url 'index' %}" class="nav-link">Explore</a></li>
-              <li class="nav-item"><a href="{% url 'hives_create' %}" class="nav-link">Create a Hive</a></li>
-              <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Log Out</a></li>
-            {% else %}
-              <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">Sign Up</a></li>
-              <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Log In</a></li>
-            {% endif %}
-          </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a id="navs" href="{% url 'about' %}" class="nav-link btn">About</a></li>
+          {% if user.is_authenticated %} 
+          <li class="nav-item"><a id="navs" href="{% url 'index' %}" class="nav-link">Explore</a></li>
+          <li class="nav-item"><a id="navs" href="{% url 'hives_create' %}" class="nav-link">Create a Hive</a></li>
+        </ul>
+        <div class="dropdown" id="left-nav-menu">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+            </svg>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">               
+            <a id="navs" href="{% url 'profile' %}" class="dropdown-item">My Hives</a>
+            <a id="navs" href="{% url 'logout' %}" class="dropdown-item">Log Out</a>
+          </div>
         </div>
+          {% else %}
+            <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">Sign Up</a></li>
+            <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Log In</a></li>
+          {% endif %} 
+      
       </div>
     </nav>
   </header>
