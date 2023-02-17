@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('hives/', views.hives_index, name='index'),
+    path('profile/', views.profile_detail, name='profile'),
     path('hives/create/', views.HiveCreate.as_view(), name='hives_create'),
     path('hives/<int:hive_id>/', views.hives_detail, name='detail'),
     path('hives/<int:pk>/update/', views.HiveUpdate.as_view(), name='hives_update'),

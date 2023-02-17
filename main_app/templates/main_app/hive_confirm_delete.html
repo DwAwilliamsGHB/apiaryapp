@@ -3,7 +3,7 @@
 {% block content %}
 
 <section class="container p-5" id="confirm-delete-form">
-  <h3 class="text-center">Are you sure you want to delete <span style="color: rgb(248, 190, 46)">{{ object.title }}</span>?</h3>
+  <h3 id="upload-hive" class="text-center">Are you sure you want to delete <span style="color: rgb(248, 190, 46)">{{ object.title }}</span>?</h3>
 
   <form action="" method="POST" id="confirm-delete">
     {% csrf_token %}

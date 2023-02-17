@@ -38,6 +38,12 @@ def get_hive(request, address_id):
 def about(request):
   return render(request, 'about.html')
 
+def profile_detail(request):
+  hives = Hive.objects.filter(user=request.user)
+  return render(request, 'profile/detail.html', {
+    'hives': hives
+  })
+
 @login_required
 def hives_index(request):
   hives = Hive.objects.all()
