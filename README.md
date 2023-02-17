@@ -3,7 +3,7 @@
 Apiary is a social event webapp where users can create and browse events, called hives. Each hive contains specific information such as title, location, and details, and is attached to the user who created it. Users can also browse a map of events near them or around the world, which is implemented using the Mapbox API.
 
 ## Screenshots
-
+![Home Page](https://i.imgur.com/V1Ao1kE.png)
 
 
 ## Getting Started
