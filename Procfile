@@ -1,0 +1,1 @@
+web: gunicorn apiaryapp.wsgi
