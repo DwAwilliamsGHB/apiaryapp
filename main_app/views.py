@@ -10,6 +10,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormVi
 from .models import Hive, Comment, Address, Photo, Like, Dislike
 from .forms import CommentForm
 from django.http import JsonResponse
+from django.http import HttpResponseBadRequest
 
 
 
@@ -52,14 +53,17 @@ def hives_detail(request, hive_id):
     'hive': hive, 'comment_form': comment_form
   })
 
+@login_required
 def add_comment(request, hive_id):
-  form = CommentForm(request.POST)
-  if form.is_valid():
-    new_comment = form.save(commit=False)
-    user = request.user
-    new_comment.hive_id = hive_id
-    new_comment.save()
-  return redirect('detail', hive_id=hive_id) 
+  hive = get_object_or_404(Hive, id=hive_id)
+  if request.method == 'POST':
+    form = CommentForm(request.POST)
+    if form.is_valid():
+      comment = form.save(commit=False)
+      comment.user = request.user
+      comment.hive = hive
+      comment.save()
+    return redirect('detail', hive_id=hive_id) 
 
 class CommentUpdate(UpdateView):
   model = Comment
