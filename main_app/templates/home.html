@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1 class="text-center p-4">See What's, <span style="color: rgb(248, 190, 46)">Buzzin'</span> Near You!</h1>
+<h1 class="text-center p-4">See What's <span style="color: rgb(248, 190, 46)">Buzzin'</span> Near You!</h1>
 
 <div class="text-center" id="search-container">
-  <input type="text" id="search-input" placeholder="New York, NY">
+  <input type="text" id="search-input" placeholder="Enter Your City">
   <button style="color: rgb(248, 190, 46)" id="search-button">Search</button>
 </div>
 
@@ -16,7 +16,7 @@
   mapboxgl.accessToken = '{{ mapbox_access_token }}';
   var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/light-v11',
+    style: 'mapbox://styles/mapbox/streets-v12',
     center: [{{ default_long }}, {{ default_lat }}],
     zoom: 9
   });
