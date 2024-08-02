@@ -8,7 +8,7 @@ env_file = os.path.join(Path(__file__).resolve().parent.parent, '.env')
 if os.path.isfile(env_file):
     environ.Env.read_env(env_file)
 else:
-    raise FileNotFoundError(f"{env_file} file not found")
+    print(f"Warning: {env_file} file not found. Using environment variables from Heroku config vars.")
 
 MAPBOX_ACCESS_TOKEN = env('MAPBOX_ACCESS_TOKEN')
 
@@ -111,18 +111,4 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'main_app/static'),
-]
-
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-import django_on_heroku
-django_on_heroku.settings(locals())
+STATIC_URL 
