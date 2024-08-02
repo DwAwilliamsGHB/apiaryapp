@@ -2,7 +2,6 @@ from pathlib import Path
 import os
 import environ
 
-# Initialize environment variables
 env = environ.Env()
 env_file = os.path.join(Path(__file__).resolve().parent.parent, '.env')
 if os.path.isfile(env_file):
@@ -13,9 +12,9 @@ else:
 MAPBOX_ACCESS_TOKEN = env('MAPBOX_ACCESS_TOKEN')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'django-insecure-+34jv0hjb#z%#7mdnp1n8_0v1aw=_4(e2ol(!2v298op383p-3'
-DEBUG = True
-ALLOWED_HOSTS = []
+SECRET_KEY = env('SECRET_KEY', default='django-insecure-+34jv0hjb#z%#7mdnp1n8_0v1aw=_4(e2ol(!2v298op383p-3')
+DEBUG = env.bool('DEBUG', default=True)
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
 INSTALLED_APPS = [
     'main_app',
@@ -29,6 +28,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this line
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -42,9 +42,7 @@ ROOT_URLCONF = 'apiaryapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'main_app/templates/location'),
-        ],
+        'DIRS': [os.path.join(BASE_DIR, 'main_app/templates/location')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,18 +69,10 @@ DATABASES = {
 }
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 LANGUAGE_CODE = 'en-us'
@@ -92,10 +82,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'main_app/static'),
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main_app/static')]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
